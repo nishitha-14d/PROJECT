@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Expense Tracker</title>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- LOGIN PAGE -->
+    <div id="loginPage">
+
+        <div class="login-box">
+
+            <div class="logo">
+                <i class="fa-solid fa-wallet"></i>
+            </div>
+
+            <h1>Expense Tracker</h1>
+
+            <p class="subtitle">
+                Login to manage your expenses
+            </p>
+
+            <form onsubmit="login(event)">
+
+                <div class="input-group">
+                    <label>Login As</label>
+
+                    <select id="role" class="role-select" required>
+                        <option value="">Select Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Email</label>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <input type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            required>
+                    </div>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    Login
+                </button>
+
+            </form>
+
+            <a href="#" class="forgot"
+                onclick="forgotPassword(event)">
+                <i class="fa-solid fa-key"></i>
+                Forgot Password?
+            </a>
+
+            <p class="signup">
+                Don't have an account?
+
+                <a href="#" onclick="signUp(event)">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Sign Up
+                </a>
+            </p>
+
+        </div>
+    </div>
+
+
+    <!-- EXPENSE TRACKER WEBSITE -->
+    <div id="website">
+
+        <header>
+
+            <h1>
+                <i class="fa-solid fa-wallet"></i>
+                Expense Tracker
+            </h1>
+
+            <p>
+                Manage your income, expenses and monthly budget
+            </p>
+
+            <p id="loggedInRole">
+                Logged in as: User
+            </p>
+
+            <button class="logout-btn" onclick="logout()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </button>
+
+        </header>
+
+
+        <div class="container">
+
+            <!-- DASHBOARD -->
+            <section class="dashboard">
+
+                <div class="card">
+                    <h3>
+                        <i class="fa-solid fa-money-bill-trend-up"></i>
+                        Total Income
+                    </h3>
+
+                    <p class="income" id="totalIncome">
+                        ₹0
+                    </p>
+                </div>
+
+
+                <div class="card">
+                    <h3>
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                        Total Expenses
+                    </h3>
+
+                    <p class="expense" id="totalExpense">
+                        ₹0
+                    </p>
+                </div>
+
+
+                <div class="card">
+                    <h3>
+                        <i class="fa-solid fa-scale-balanced"></i>
+                        Balance
+                    </h3>
+
+                    <p class="balance" id="balance">
+                        ₹0
+                    </p>
+                </div>
+
+
+                <div class="card">
+                    <h3>
+                        <i class="fa-solid fa-bullseye"></i>
+                        Monthly Budget
+                    </h3>
+
+                    <p class="budget" id="displayBudget">
+                        ₹0
+                    </p>
+                </div>
+
+            </section>
+
+
+            <!-- ADD TRANSACTION -->
+            <section class="section">
+
+                <h2>
+                    <i class="fa-solid fa-circle-plus"></i>
+                    Add Transaction
+                </h2>
+
+                <form class="form" id="transactionForm">
+
+                    <div class="form-group">
+                        <label>Transaction Name</label>
+
+                        <input type="text"
+                            id="title"
+                            placeholder="Example: Grocery Shopping"
+                            required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Amount</label>
+
+                        <input type="number"
+                            id="amount"
+                            placeholder="Enter amount"
+                            min="1"
+                            required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Type</label>
+
+                        <select id="type">
+                            <option value="expense">Expense</option>
+                            <option value="income">Income</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Category</label>
+
+                        <select id="category">
+                            <option>Food</option>
+                            <option>Travel</option>
+                            <option>Shopping</option>
+                            <option>Education</option>
+                            <option>Bills</option>
+                            <option>Entertainment</option>
+                            <option>Health</option>
+                            <option>Rent</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Date</label>
+
+                        <input type="date"
+                            id="date"
+                            required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Description</label>
+
+                        <input type="text"
+                            id="description"
+                            placeholder="Optional description">
+                    </div>
+
+
+                    <button type="submit" class="full">
+                        <i class="fa-solid fa-plus"></i>
+                        Add Transaction
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <!-- BUDGET -->
+            <section class="section">
+
+                <h2>
+                    <i class="fa-solid fa-bullseye"></i>
+                    Monthly Budget
+                </h2>
+
+                <input type="number"
+                    id="budgetInput"
+                    class="budget-input"
+                    placeholder="Enter monthly budget"
+                    min="0">
+
+                <button onclick="setBudget()">
+                    <i class="fa-solid fa-check"></i>
+                    Set Budget
+                </button>
+
+                <div class="budget-info">
+
+                    <span>
+                        Spent:
+                        <strong id="budgetSpent">₹0</strong>
+                    </span>
+
+                    <span>
+                        Budget:
+                        <strong id="budgetAmount">₹0</strong>
+                    </span>
+
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-bar"
+                        id="progressBar">
+                    </div>
+                </div>
+
+                <p class="budget-status"
+                    id="budgetStatus">
+                    Set a budget to start tracking.
+                </p>
+
+            </section>
+
+
+            <!-- TRANSACTION HISTORY -->
+            <section class="section">
+
+                <h2>
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    Transaction History
+                </h2>
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="transactionList">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- EXPENSE REPORT -->
+            <section class="section">
+
+                <h2>
+                    <i class="fa-solid fa-chart-column"></i>
+                    Expense Report
+                </h2>
+
+                <div id="reports">
+                    <p>
+                        Add expenses to see your report.
+                    </p>
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <footer>
+            <p>
+                © 2026 Expense Tracker |
+                Frontend Development Frameworks Project
+            </p>
+        </footer>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
